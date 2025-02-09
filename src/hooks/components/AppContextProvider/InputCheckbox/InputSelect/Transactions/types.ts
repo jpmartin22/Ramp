@@ -1,20 +1,19 @@
-export type InputSelectItem = { label: string; value: string }
+import { FunctionComponent } from "react"
+import { Transaction } from "../../utils/types"
 
-export type InputSelectProps<TItem> = {
-  label: string
-  defaultValue?: TItem | null
-  onChange: (value: TItem | null) => void
-  items: TItem[]
-  parseItem: (item: TItem) => InputSelectItem
-  isLoading?: boolean
-  loadingLabel: string
+export type SetTransactionApprovalFunction = (params: {
+  transactionId: string
+  newValue: boolean
+}) => Promise<void>
+
+type TransactionsProps = { transactions: Transaction[] | null }
+
+type TransactionPaneProps = {
+  transaction: Transaction
+  loading: boolean
+  approved?: boolean
+  setTransactionApproval: SetTransactionApprovalFunction
 }
 
-export type DropdownPosition = {
-  top: number
-  left: number
-}
-
-export type InputSelectOnChange<TItem> = (selectedItem: TItem | null) => void
-
-export type GetDropdownPositionFn = (target: EventTarget) => DropdownPosition
+export type TransactionsComponent = FunctionComponent<TransactionsProps>
+export type TransactionPaneComponent = FunctionComponent<TransactionPaneProps>
